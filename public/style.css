@@ -1,0 +1,19 @@
+* {
+    margin: 0; 
+    padding: 0;
+}
+
+/* header */
+header h1 {
+    background-color: darkorange;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+/* header */
+
+/* main */
+.card-img-top {
+    height: 200px;
+}
+/* main */

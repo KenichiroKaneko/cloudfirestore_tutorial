@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>POS</title>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+            integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="style.css">
+
+        
+        <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+        <!-- <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>  
+        <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script> -->
+        <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/ui/3.5.2/firebase-ui-auth__ja.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-analytics.js"></script>
+
+        <script src="script.js"></script>
+
+        
+
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <h1>プロキッズマート</h1>
+            </div>
+        </header>
+
+        <div class="main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2">
+                        <p>絞り込み</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="dropdown">
+                            <button type="button" id="dropdown1" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                カテゴリー
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdown1">
+                                <a class="dropdown-item" href="#" onclick="category('食べ物')">食べ物</a>
+                                <a class="dropdown-item" href="#" onclick="category('飲み物')">飲み物</a>
+                                <a class="dropdown-item" href="#" onclick="category('おにぎり')">おにぎり</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="goods">
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <img class="card-img-top" src="images/petbottle_tea.png">
+                            <div class="card-body">
+                                <span class="badge badge-primary">食べ物</span>
+                                <h4 class="card-title">うま茶</h4>
+                                <p class="card-text price">¥140-</p>
+                                <p class="card-text stock">30</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
