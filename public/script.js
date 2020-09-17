@@ -15,29 +15,6 @@ firebase.analytics();
 var db = firebase.firestore();
 
 
-var citiesRef = db.collection("cities");
-
-citiesRef.doc("SF").set({
-    name: "San Francisco", state: "CA", country: "USA",
-    capital: false, population: 860000,
-    regions: ["west_coast", "norcal"] });
-citiesRef.doc("LA").set({
-    name: "Los Angeles", state: "CA", country: "USA",
-    capital: false, population: 3900000,
-    regions: ["west_coast", "socal"] });
-citiesRef.doc("DC").set({
-    name: "Washington, D.C.", state: null, country: "USA",
-    capital: true, population: 680000,
-    regions: ["east_coast"] });
-citiesRef.doc("TOK").set({
-    name: "Tokyo", state: null, country: "Japan",
-    capital: true, population: 9000000,
-    regions: ["kanto", "honshu"] });
-citiesRef.doc("BJ").set({
-    name: "Beijing", state: null, country: "China",
-    capital: true, population: 21500000,
-    regions: ["jingjinji", "hebei"] });
-
 var goodsRef = db.collection("goods");
 
 
@@ -91,39 +68,56 @@ goodsRef.doc("mo").set({
     stock: 13,
     image: "images/onigiri_mentaiko.png"
 })
-
-
-
-var docRef = db.collection("cities").doc("SF");
-var data = "";
-
-// docRef.get().then(function(doc) {
-//   if (doc.exists) {
-//     console.log("document Data:", doc.data());
-//     data = doc.data();
-//     console.log(data);
-//     console.log(data.name);
-//   } else {
-//      console.log("no such document");
-//   }
-
-// }).catch(function(error) {
-//   console.log("Error getting document:", error);
-// })
-
-goodsRef.get().then(function(doc) {
-    if (doc.exists) {
-        console.log(doc.data());
-    } else {
-        console.log("no such document");
-    }
+goodsRef.doc("mp").set({
+    name: "メロンパン",
+    category: ["食べ物","パン"],
+    price: 128,
+    stock: 4,
+    image: "images/pan_melonpan.png"
+})
+goodsRef.doc("sp").set({
+    name: "食パン",
+    category: ["食べ物", "パン"],
+    price: 160,
+    stock: 3,
+    image: "images/pan_bread_1kin_yama.png"
+})
+goodsRef.doc("ap").set({
+    name: "あんぱん",
+    category: ["食べ物", "パン"],
+    price: 128,
+    stock: 5,
+    image: "images/food_anpan.png"
 })
 
+// goodsRef.doc("").set({
+//     name: "",
+//     category: [""],
+//     price: ,
+//     stock: ,
+//     image: ""
+// })
+
+function searchByText() {
+    const text = $('#searchBox').val();
+    console.log(text);
+    goodsRef.where("name", "==", text).get().then(function (querrySnapshot) {
+        getGoods(querrySnapshot);
+    })
+}
 
 function category(category) {
     goodsRef.where("category", "array-contains", category).get().then(function (querrySnapshot) {
         getGoods(querrySnapshot);
     })
+    $('#dropdown1-text').html(category);
+}
+
+function sort(text, sortType, order) {
+    goodsRef.orderBy(sortType, order).get().then(function (querrySnapshot) {
+        getGoods(querrySnapshot);
+    })
+    $('#dropdown2-text').html(text);
 }
 
 window.onload = function () {
@@ -133,27 +127,34 @@ window.onload = function () {
 }
 
 function getGoods(querrySnapshot) {
-
     $('#goods').empty();
     querrySnapshot.forEach(function (doc) {
+        console.log(doc.id)
         var h = "";
         doc.data().category.forEach(function (category) {
-            h += `<span class="badge badge-primary">${category}</span>
-            `;
+            h += `<span class="badge badge-info">${category}</span>
+        `;
         })
         var g = `
-                <div class="col-lg-3">
-                    <div class="card">
+            <div class="col-lg-4 col-sm-6">
+                <div class="card">
+                    <div class="goods-image-wrapper">
                         <img class="card-img-top" src="${doc.data().image}">
-                        <div class="card-body">
-                            ${h}
-                            <h4 class="card-title">${doc.data().name}</h4>
-                            <p class="card-text price">¥${doc.data().price}-</p>
-                            <p class="card-text stock">残り${doc.data().stock}個</p>
-                        </div>
                     </div>
-                </div>`;
+                    
+                    <div class="card-body">
+                        ${h}
+                        <h4 class="card-title">${doc.data().name}</h4>
+                        <p class="card-text price">¥${doc.data().price}-</p>
+                        <p class="card-text stock">残り${doc.data().stock}個</p>
+                        <button type="button" class="btn btn-primary id="${doc.id}" btn-block onclick="addCart(this.id);">カートに追加</button>
+                    </div>
+                </div>
+            </div>`;
         $('#goods').append(g);
     })
 }
 
+function addCart(element) {
+    console.log(element)
+}

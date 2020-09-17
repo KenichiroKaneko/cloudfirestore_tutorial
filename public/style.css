@@ -13,7 +13,30 @@ header h1 {
 /* header */
 
 /* main */
-.card-img-top {
+.query-tools {
+    padding: 8px;
+}
+.card {
+    margin: 10px;
+}
+.goods-image-wrapper {
     height: 200px;
+    text-align: center;
+}
+.card-img-top {
+    padding: 20px;
+    height: 100%;
+    width: auto;
+}
+.card-body {
+    background-color: #eeeeee;
+}
+.card-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.btn-wrapper {
+    padding: 8px;
 }
 /* main */
